@@ -1,0 +1,68 @@
+User,projectname,street,city,zip,country,phase,IfcElement,Guid,Element Type,Number,Name,Storey,Length [m],Width [m],Height [m],Perimeter [m],Floor Area [m2],Ceiling Area [m2],Wall Area [m2],Volume [m3],IsExternal,Normal [degrees]
+simon d,1,,,,,1,IfcSpace,13CXcK2WuHwuyg0aAi40u6,Space Interior,Space,,0.0,,,3.0,14.23,12.64,12.64,42.68,38.0,False,
+simon d,1,,,,,1,IfcSpace,13CZAe2WuHwuyg0aAi40u6,Space Interior,Space,,0.0,,,3.0,14.23,12.64,12.64,42.68,38.0,False,
+simon d,1,,,,,1,IfcWall,13CbIk2WuHwuyg0aAi40u6,Wall Interior,,Wall Interior,0.0,3.65,0.12,3.0,7.43,0.44,0.44,10.95,1.32,False,
+simon d,1,,,,,1,IfcWall,13CsR82WuHwuyg0aAi40u6,Wall Exterior,,Wall Exterior,0.0,4.36,0.35,3.0,8.5,1.4,1.4,13.080000000000002,4.199999999999999,True,90
+simon d,1,,,,,1,IfcCovering,13Cstk2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,0.0,,3.0,,8.84,,,13.26,1.7,True,90
+simon d,1,,,,,1,IfcWall,13Cxlc2WuHwuyg0aAi40u6,Wall Exterior,,Wall Exterior,0.0,4.36,0.35,3.0,8.5,1.4,1.4,13.080000000000002,4.199999999999999,True,-90
+simon d,1,,,,,1,IfcCovering,13CyU02WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,0.0,,3.0,,8.84,,,13.26,1.7,True,-90
+simon d,1,,,,,1,IfcWall,13DGRW2WuHwuyg0aAi40u6,Wall Exterior,,Wall Exterior,0.0,7.74,0.35,3.0,15.27,2.59,2.59,23.22,7.77,True,180
+simon d,1,,,,,1,IfcCovering,13DGqM2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,0.0,,3.0,,15.61,,,23.415,3.02,True,180
+simon d,1,,,,,1,IfcWall,13DbLA2WuHwuyg0aAi40u6,Wall Exterior,,Wall Exterior,0.0,7.74,0.35,3.0,8.03,2.59,2.59,23.22,7.77,True,0
+simon d,1,,,,,1,IfcCovering,13DbuK2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,0.0,,3.0,,15.61,,,23.415,3.02,True,0
+simon d,1,,,,,1,IfcSlab,13DhF82WuHwuyg0aAi40u6,Base Plate,,Base Plate,-0.5,,0.5,,24.19,33.69,,,16.84,True,
+simon d,1,,,,,1,IfcCovering,13DiGS2WuHwuyg0aAi40u6,Covering Base Plate,,Covering Base Plate,0.0,,0.13,,16.45,33.69,,,4.38,True,
+simon d,1,,,,,1,IfcCovering,13DjR82WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,0.0,,0.5,,15.61,,,3.902,0.5,True,0
+simon d,1,,,,,1,IfcCovering,13F59q2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,0.0,,0.5,,8.84,,,2.21,0.28,True,-90
+simon d,1,,,,,1,IfcCovering,13F6Yu2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,0.0,,0.5,,15.61,,,3.902,0.5,True,180
+simon d,1,,,,,1,IfcCovering,13F7g82WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,0.0,,0.5,,8.84,,,2.21,0.28,True,90
+simon d,1,,,,,1,IfcDoor,13F8mS2WuHwuyg0aAi40u6,Door Exterior,,Door Exterior,0.0,1.0,0.35,2.27,2.7,0.35,0.35,2.27,0.794,True,90
+simon d,1,,,,,1,IfcDoor,13F9S22WuHwuyg0aAi40u6,Door Exterior,,Door Exterior,0.0,1.0,0.35,2.27,2.7,0.35,0.35,2.27,0.794,True,-90
+simon d,1,,,,,1,IfcDoor,13FADk2WuHwuyg0aAi40u6,Door Exterior,,Door Exterior,0.0,0.91,0.35,2.27,2.52,0.318,0.318,2.066,0.723,True,0
+simon d,1,,,,,1,IfcDoor,13FB4G2WuHwuyg0aAi40u6,Door Exterior,,Door Exterior,0.0,0.91,0.35,2.27,2.52,0.318,0.318,2.066,0.723,True,180
+simon d,1,,,,,1,IfcDoor,13FByg2WuHwuyg0aAi40u6,Door Interior,,Door Interior,0.0,1.0,0.12,2.27,2.24,0.12,0.12,2.27,0.272,False,
+simon d,1,,,,,1,IfcWindow,13FCou2WuHwuyg0aAi40u6,Window Exterior,,Window Exterior,1.0,1.0,0.35,1.27,2.7,0.35,0.35,1.27,0.444,True,90
+simon d,1,,,,,1,IfcWindow,13FDgW2WuHwuyg0aAi40u6,Window Exterior,,Window Exterior,1.0,1.0,0.35,1.27,2.7,0.35,0.35,1.27,0.444,True,-90
+simon d,1,,,,,1,IfcWindow,13FEPs2WuHwuyg0aAi40u6,Window Exterior,,Window Exterior,1.0,0.91,0.35,1.27,2.52,0.318,0.318,1.156,0.404,True,0
+simon d,1,,,,,1,IfcWindow,13Fyig2WuHwuyg0aAi40u6,Window Exterior,,Window Exterior,1.0,0.91,0.35,1.27,2.52,0.318,0.318,1.156,0.404,True,180
+simon d,1,,,,,1,IfcSpace,13GMpm2WuHwuyg0aAi40u6,Space Interior,Space,,3.3,,,3.0,14.22,12.64,12.64,42.67,38.0,False,
+simon d,1,,,,,1,IfcWall,13GccO2WuHwuyg0aAi40u6,Wall Exterior,,Wall Exterior,3.3,4.16,0.35,3.0,8.11,1.34,1.34,12.48,4.0200000000000005,True,150
+simon d,1,,,,,1,IfcCovering,13Gd502WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,3.0,,8.45,,,12.675,1.62,True,150
+simon d,1,,,,,1,IfcWall,13GiY42WuHwuyg0aAi40u6,Wall Exterior,,Wall Exterior,3.3,4.16,0.35,3.0,4.45,1.33,1.33,12.48,3.99,True,-30
+simon d,1,,,,,1,IfcCovering,13Gi__2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,3.0,,8.45,,,12.675,1.62,True,-30
+simon d,1,,,,,1,IfcWall,13HP7q2WuHwuyg0aAi40u6,Wall Exterior,,Wall Exterior,3.3,4.36,0.35,3.0,4.64,1.4,1.4,13.080000000000002,4.199999999999999,True,60
+simon d,1,,,,,1,IfcCovering,13HPb22WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,3.0,,8.84,,,13.26,1.7,True,60
+simon d,1,,,,,1,IfcWall,13HUpQ2WuHwuyg0aAi40u6,Wall Exterior,,Wall Exterior,3.3,4.35,0.35,3.0,5.34,1.4,1.4,13.049999999999999,4.199999999999999,True,-120
+simon d,1,,,,,1,IfcCovering,13HVFs2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,3.0,,8.83,,,13.245,1.7,True,-120
+simon d,1,,,,,1,IfcSlab,13Hpu02WuHwuyg0aAi40u6,Roof,,Roof,3.0,,0.3,,18.45,11.34,,,3.4,True,
+simon d,1,,,,,1,IfcCovering,13Hqqo2WuHwuyg0aAi40u6,Covering Roof,,Covering Roof,3.3,,0.13,,18.45,,11.34,,1.47,True,
+simon d,1,,,,,1,IfcCovering,13Hs782WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,4.9,,,0.735,0.09,True,0
+simon d,1,,,,,1,IfcCovering,13HtGG2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,9.25,,,1.388,0.18,True,0
+simon d,1,,,,,1,IfcCovering,13I75E2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,8.84,,,1.326,0.17,True,-90
+simon d,1,,,,,1,IfcCovering,13I8ZI2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,6.26,,,0.939,0.12,True,180
+simon d,1,,,,,1,IfcCovering,13I9fw2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,4.16,,,0.624,0.08,True,180
+simon d,1,,,,,1,IfcCovering,13IAfC2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,8.84,,,1.326,0.17,True,90
+simon d,1,,,,,1,IfcSlab,13IByy2WuHwuyg0aAi40u6,Roof,,Roof,3.0,,0.3,,14.55,5.91,,,1.77,True,
+simon d,1,,,,,1,IfcCovering,13IClu2WuHwuyg0aAi40u6,Covering Roof,,Covering Roof,3.3,,0.13,,12.17,,5.91,,0.77,True,
+simon d,1,,,,,1,IfcSlab,13IE3e2WuHwuyg0aAi40u6,Base Plate,,Base Plate,3.0,,0.3,,6.28,1.53,,,0.46,True,
+simon d,1,,,,,1,IfcCovering,13IEum2WuHwuyg0aAi40u6,Covering Base Plate,,Covering Base Plate,3.3,,0.13,,6.28,1.53,,,0.2,True,
+simon d,1,,,,,1,IfcCovering,13IG1u2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,0.92,,,0.138,0.02,True,60
+simon d,1,,,,,1,IfcCovering,13IVnY2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,1.51,,,0.226,0.03,True,-30
+simon d,1,,,,,1,IfcCovering,13IXE22WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,2.79,,,0.418,0.05,True,-120
+simon d,1,,,,,1,IfcCovering,13IYYk2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,3.3,,0.3,,4.74,,,0.711,0.09,True,150
+simon d,1,,,,,1,IfcSlab,13IZzM2WuHwuyg0aAi40u6,Base Plate,,Base Plate,3.0,,0.3,,1.87,0.14,,,0.04,True,
+simon d,1,,,,,1,IfcCovering,13Iavg2WuHwuyg0aAi40u6,Covering Base Plate,,Covering Base Plate,3.3,,0.13,,1.47,0.14,,,0.02,True,
+simon d,1,,,,,1,IfcSlab,13IcLO2WuHwuyg0aAi40u6,Slab Interior,,Slab Interior,3.0,,0.3,,15.78,16.43,,,4.93,False,
+simon d,1,,,,,1,IfcDoor,13IdUC2WuHwuyg0aAi40u6,Door Exterior,,Door Exterior,3.3,1.321,0.35,2.27,3.342,0.462,0.462,2.999,1.05,True,60
+simon d,1,,,,,1,IfcDoor,13IeFk2WuHwuyg0aAi40u6,Door Exterior,,Door Exterior,3.3,1.321,0.35,2.27,3.342,0.462,0.462,2.999,1.05,True,-120
+simon d,1,,,,,1,IfcDoor,13Itja2WuHwuyg0aAi40u6,Door Exterior,,Door Exterior,3.3,1.288,0.35,2.27,3.276,0.451,0.451,2.924,1.023,True,150
+simon d,1,,,,,1,IfcDoor,13IuzQ2WuHwuyg0aAi40u6,Door Exterior,,Door Exterior,3.3,1.288,0.35,2.27,3.276,0.451,0.451,2.924,1.023,True,-30
+simon d,1,,,,,1,IfcWindow,13IwAm2WuHwuyg0aAi40u6,Window Exterior,,Window Exterior,4.3,1.288,0.35,1.27,3.276,0.451,0.451,1.636,0.573,True,150
+simon d,1,,,,,1,IfcWindow,13Ix7s2WuHwuyg0aAi40u6,Window Exterior,,Window Exterior,4.3,1.321,0.35,1.27,3.342,0.462,0.462,1.678,0.587,True,60
+simon d,1,,,,,1,IfcWindow,13Iy4o2WuHwuyg0aAi40u6,Window Exterior,,Window Exterior,4.3,1.288,0.35,1.27,3.276,0.451,0.451,1.636,0.573,True,-30
+simon d,1,,,,,1,IfcSlab,13I_xc2WuHwuyg0aAi40u6,Roof,,Roof,6.3,,0.5,,17.02,18.11,,,9.06,True,
+simon d,1,,,,,1,IfcCovering,13J0AM2WuHwuyg0aAi40u6,Covering Roof,,Covering Roof,6.3,,0.13,,12.67,,18.11,,2.35,True,
+simon d,1,,,,,1,IfcCovering,13J1EA2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,6.3,,0.5,,8.84,,,2.21,0.28,True,60
+simon d,1,,,,,1,IfcCovering,13JGlc2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,6.3,,0.5,,8.45,,,2.112,0.27,True,-30
+simon d,1,,,,,1,IfcCovering,13JH_C2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,6.3,,0.5,,8.83,,,2.208,0.28,True,-120
+simon d,1,,,,,1,IfcCovering,13JJGs2WuHwuyg0aAi40u6,Covering Facade,,Covering Facade,6.3,,0.5,,8.45,,,2.112,0.27,True,150
