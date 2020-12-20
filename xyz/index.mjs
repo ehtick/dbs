@@ -8,23 +8,18 @@ let renderer, camera, scene, obj, controls;
 init();
 
 function init() {
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1e4);
   camera.position.set(0, 20, 50);
   scene = new THREE.Scene();
   scene.add(camera);
   scene.add(new THREE.AxesHelper);
-  scene.background = new THREE.Color( 0xbfd1e5 );
+  scene.background = new THREE.Color(0xbfd1e5);
   const light = new THREE.PointLight();
-  light.position.y = 30;
+  light.position.x = -1e2;
+  light.position.y = 1e2;
+  light.position.z = -1e1;
   scene.add(light);
-
-  const opts = {
-    color: 'green',
-    size: 1,
-    sizeAttenuation: true,
-    depthTest: true,
-    transparent: true
-  };
+  //scene.add(new THREE.DirectionalLight());
 
   function getDimensions(xyz) {
     if (xyz.length < 3) {
@@ -45,6 +40,7 @@ function init() {
     return [width, height];
   }
 
+  // https://blog.mastermaps.com/2013/10/terrain-building-with-threejs.html
   function transferZ(vertsA, vertsB) {
     if (vertsA.length != vertsB.length)
       throw new Error(`vertsA.length: ${vertsA.length} != vertsB.length: ${vertsB.length}`);
@@ -56,22 +52,17 @@ function init() {
     }
   }
 
-  function transfer2(geometry, xyzArr, vertices) {
-    var hVerts = geometry.heightSegments + 1;
-    var wVerts = geometry.widthSegments + 1;
-    for (let j = 0; j < hVerts; j++) {
-      for (let i = 0; i < wVerts; i++) {
-        //+0 is x, +1 is y.
-        const off = 3*(j*wVerts+i)+2;
-        vertices[off] = xyzArr[off];
-      }
-    }
-  }
+  const opts = {
+    color: 'green',
+    side: THREE.DoubleSide,
+    wireframe: false,
+    depthTest: true,
+    transparent: true,
+  };
 
   const loader = new XYZLoader();
   loader.load('sample.xyz', geometry => {
       geometry.center();
-      const opts = {color: 'green', side: THREE.DoubleSide};
       const material = new THREE.MeshPhongMaterial(opts);
       console.log('loaded xyz geometry: ', geometry);
       const xyzArr = geometry.attributes.position.array;
@@ -82,7 +73,6 @@ function init() {
       const position = geom2.getAttribute('position');
       const vertices = position.array;
       transferZ(xyzArr, vertices);
-      //transfer2(geom2, xyzArr, vertices);
       obj = new THREE.Mesh(geom2, material);
       obj.rotateX(Math.PI / 2);
       scene.add(obj);
