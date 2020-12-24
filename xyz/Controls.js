@@ -93,7 +93,7 @@ export default class Controls {
                   oninput="document.forms['${formName}'].onSlider(this, '${propName}')"/>
               <input name="${propName}" value="${value}"
                   oninput="document.forms['${formName}'].onInput(this, '${propName}')"/>
-                               &nbsp;&nbsp;[&nbsp;${min}&nbsp;,&nbsp;${max}&nbsp;]
+                               <span class="bounds">[&nbsp;${min}&nbsp;,&nbsp;${max}&nbsp;]</span>
            </td>
          </tr>`;
     }

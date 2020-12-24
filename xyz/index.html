@@ -7,27 +7,31 @@
   </head>
   <body>
     <h1>XYZ Extract Tool</h1>
-    <div id="view" style="width: 640px; height: 480px"></div>
+    <div id="view-pad">
+      <div id="view" style="width: 640px; height: 480px"></div>
+    </div>
 
+    <h2>Data Source</h2>
     <label for="area">Choose an area:</label>
     <select name="area">
       <option value="zurich">Canton Zürich</option>
     </select>
 
-    <h2>by reference point</h2>
+    <h2>Project data</h2>
+    <h3>by reference point</h3>
     <form name="radius">
       <table>
         <!-- See Controls.js. -->
       </table>
-      <button>Get Data</button>
+      <button>Download</button>
     </form>
 
-    <h2>by bounding box</h2>
+    <h3>by bounding box</h3>
     <form name="box">
       <table>
         <!-- See Controls.js. -->
       </table>
-      <button>Get Data</button>
+      <button>Download</button>
     </form>
 
     <script type="module" src="index.js"></script>
