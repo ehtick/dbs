@@ -39,23 +39,6 @@ button {
   border: solid 1px #ddd;
 }
 
-#view {
-  position: relative;
-  top: 0;
-  right: 0;
-  width: 600px;
-  height: 600px;
-  background-color: black;
-}
-
-
-#view > canvas {
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
 
 .bounds {
   font-size: small;
