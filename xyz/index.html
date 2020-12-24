@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>XYZ Loader</title>
+    <title>XYZ Extract Tool</title>
     <link rel="stylesheet" href="index.css"/>
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
   </head>
   <body>
-    <script type="module" src="index.mjs"></script>
+    <h1>XYZ Extract Tool</h1>
+    <div id="view" style="width: 640px; height: 480px"></div>
+
+    <label for="area">Choose an area:</label>
+    <select name="area">
+      <option value="zurich">Canton Zürich</option>
+    </select>
+
+    <h2>by reference point</h2>
+    <form name="radius">
+      <table>
+        <!-- See Controls.js. -->
+      </table>
+      <button>Get Data</button>
+    </form>
+
+    <h2>by bounding box</h2>
+    <form name="box">
+      <table>
+        <!-- See Controls.js. -->
+      </table>
+      <button>Get Data</button>
+    </form>
+
+    <script type="module" src="index.js"></script>
   </body>
 </html>

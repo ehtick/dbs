@@ -1,4 +1,22 @@
 body {
-  margin: 0;
-  padding: 0;
+}
+
+
+#view {
+  position: relative;
+  top: 0;
+  right: 0;
+  width: 600px;
+  height: 600px;
+  float: right;
+  margin: 2em;
+  background-color: black;
+}
+
+
+#view > canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
