@@ -17,13 +17,19 @@ export default class View extends THREE.Scene {
     this.add(new THREE.AxesHelper);
     this.background = new THREE.Color(0xbfd1e5);
     const light = new THREE.PointLight();
-    light.position.x = -1e2;
-    light.position.y = 1e2;
-    light.position.z = -1e1;
+    light.castShadow = true;
+    light.shadow.mapSize.width = 512; // default
+    light.shadow.mapSize.height = 512; // default
+    light.shadow.camera.near = 0.5; // default
+    light.shadow.camera.far = 500; // default
+    light.position.set(-1e2, 1e2, 1e2);
+    document.light = light;
     this.add(light);
     this.xyz = new XYZObject('sample.xyz', xyzLoadCb);
     this.add(this.xyz);
     this.renderer = new THREE.WebGLRenderer();
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     //TODO: check about the mobile thing
     //renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(this.width, this.height);
@@ -42,12 +48,14 @@ export default class View extends THREE.Scene {
 
   focus(zoomBounds) {
     const width = Math.max(1, zoomBounds.Xmax - zoomBounds.Xmin);
-    const height = 5; // TODO: get it from xyz height
+    const height = 20; // TODO: get it from xyz height
     const depth = Math.max(1, zoomBounds.Ymax - zoomBounds.Ymin);
     //console.log(`width(${width}) height(${height}) depth(${depth})`, zoomBounds);
     const geometry = new THREE.BoxGeometry(width, height, depth);
-    const material = new THREE.MeshBasicMaterial({color: 0x00ff00, wireframe: true});
+    const material = new THREE.MeshBasicMaterial({color: 0x00ff00, transparent: true, opacity: 0.3});
     const mesh = new THREE.Mesh(geometry, material);
+    mesh.castShadow = true;
+    //mesh.receiveShadow = true;
     const viewBounds = this.xyz.children[0].bounds;
     const xOff = zoomBounds.Xmin - viewBounds[0];
     const yOff = zoomBounds.Ymin - viewBounds[1];

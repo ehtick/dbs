@@ -8,7 +8,6 @@ export default class XYZObject extends THREE.Object3D {
     new XYZLoader().load(xyzFilename, geometry => {
         const xyzShape = toShape(geometry);
         this.add(xyzShape);
-        console.log()
         cb(xyzShape.bounds);
     });
   }
@@ -38,6 +37,8 @@ function toShape(geometry) {
   const vertices = position.array;
   transferZ(xyzArr, vertices);
   const obj = new THREE.Mesh(geom2, material);
+  obj.receiveShadow = true;
+  //obj.castShadow = true;
   obj.bounds = bounds;
   obj.rotateX(Math.PI / 2);
   return obj;
