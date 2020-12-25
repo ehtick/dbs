@@ -2,13 +2,15 @@ import * as THREE from '../js/lib/three.js/three.module.js';
 import {XYZLoader} from '../js/lib/three.js/XYZLoader.js';
 
 
+/** Scene object to view XYZ file. */
 export default class XYZObject extends THREE.Object3D {
   constructor(xyzFilename, cb) {
     super();
     new XYZLoader().load(xyzFilename, geometry => {
         const xyzShape = toShape(geometry);
         this.add(xyzShape);
-        cb(xyzShape.bounds);
+        this.shape = xyzShape;
+        cb(this);
     });
   }
 }

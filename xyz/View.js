@@ -1,13 +1,20 @@
 import * as THREE from '../js/lib/three.js/three.module.js';
-import { MapControls } from '../js/lib/three.js/OrbitControls.js';
-import Fullscreen from '../js/fullscreen.js';
+import {MapControls} from '../js/lib/three.js/OrbitControls.js';
 
+import Fullscreen from '../js/fullscreen.js';
 import XYZObject from './XYZObject.js';
 
 
+/**
+ * Display XYZObject and active section selection.  Defaults to
+ * binding DOM elt '#view'.
+ */
 export default class View extends THREE.Scene {
-  constructor(container, xyzLoadCb) {
+  constructor(container = document.querySelector('#view')) {
     super();
+    if (!container) {
+      throw new Error('View container not found');
+    }
     this.container = container;
     this.width = container.innerWidth;
     this.height = container.innerHeight;
@@ -25,8 +32,6 @@ export default class View extends THREE.Scene {
     light.position.set(-1e2, 1e2, 1e2);
     document.light = light;
     this.add(light);
-    this.xyz = new XYZObject('sample.xyz', xyzLoadCb);
-    this.add(this.xyz);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -38,11 +43,19 @@ export default class View extends THREE.Scene {
     this.fs = new Fullscreen(container, () => {
         this.onWindowResize();
       });
-    //window.addEventListener('resize', onWindowResize, false);
     this.onWindowResize();
     this.animate();
     document.view = this;
     this.zoomBox = null;
+  }
+
+
+  setObj(xyzObj) {
+    if (this.xyzObj) {
+      this.remove(this.xyzObj);
+    }
+    this.add(xyzObj);
+    this.xyzObj = xyzObj;
   }
 
 
@@ -56,7 +69,7 @@ export default class View extends THREE.Scene {
     const mesh = new THREE.Mesh(geometry, material);
     mesh.castShadow = true;
     //mesh.receiveShadow = true;
-    const viewBounds = this.xyz.children[0].bounds;
+    const viewBounds = this.xyzObj.children[0].bounds;
     const xOff = zoomBounds.Xmin - viewBounds[0];
     const yOff = zoomBounds.Ymin - viewBounds[1];
     mesh.position.x = xOff;

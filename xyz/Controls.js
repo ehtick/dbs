@@ -1,6 +1,8 @@
+/**
+ * Sets up the input sliders and text fields with min/max bounds.
+ */
 export default class Controls {
-  constructor() {
-  }
+  constructor() {}
 
   init(viewBounds, cb) {
     this.cb = cb;
