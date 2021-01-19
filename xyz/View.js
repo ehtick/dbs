@@ -5,7 +5,7 @@ import Fullscreen from '../js/fullscreen.js';
 import XYZObject from './XYZObject.js';
 
 
-const zoomBoxOpacity = 0.2;
+const zoomBoxOpacity = 0.3;
 
 /**
  * Display XYZObject and active section selection.  Defaults to
@@ -23,7 +23,7 @@ export default class View extends THREE.Scene {
     this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 0.1, 1e4);
     this.camera.position.set(0, 3e1, 1.5e2);
     this.add(this.camera);
-    //this.add(new THREE.AxesHelper);
+    this.add(new THREE.AxesHelper);
     this.background = new THREE.Color(0xbfd1e5);
     const light = new THREE.PointLight();
     // TODO: better shadows.
@@ -42,7 +42,6 @@ export default class View extends THREE.Scene {
     shadowLight.castShadow = false;
     shadowLight.intensity = 1.0 - zoomBoxOpacity;
     this.add(shadowLight);
-    //this.add(new THREE.AmbientLight(0x888888));
     this.renderer = new THREE.WebGLRenderer({antialias: true});
     this.renderer.shadowMap.enabled = true;
     //TODO: check about the mobile thing
@@ -72,12 +71,16 @@ export default class View extends THREE.Scene {
 
   focus(zoomBounds) {
     const viewBounds = this.xyzObj.children[0].bounds;
-    const xOff = zoomBounds.Xmin - viewBounds[0];
-    const yOff = zoomBounds.Ymin - viewBounds[1];
-    const width = Math.max(1, zoomBounds.Xmax - zoomBounds.Xmin);
-    const height = 20; // TODO: get it from xyz height
-    const depth = Math.max(1, zoomBounds.Ymax - zoomBounds.Ymin);
+    const viewWidth = viewBounds[2] - viewBounds[0];
+    const viewDepth = viewBounds[3] - viewBounds[1];
+    const xOff = viewBounds[0] - zoomBounds.Xmin;
+    const yOff = viewBounds[1] - zoomBounds.Ymin;
+    const width = Math.max(1, zoomBounds.Xmax - zoomBounds.Xmin) / 2;
+    const height = 20; // TODO: get it from xyz height?
+    const depth = Math.max(1, zoomBounds.Ymax - zoomBounds.Ymin) / 2;
+    //console.log(`width(${width}) depth(${depth})`, viewBounds, zoomBounds);
     const geometry = new THREE.BoxGeometry(width, height, depth);
+    geometry.center();
     const material = new THREE.MeshBasicMaterial({
         color: 0xffffff, transparent: true, opacity: zoomBoxOpacity});
     const box = new THREE.Mesh(geometry, material);
@@ -93,8 +96,8 @@ export default class View extends THREE.Scene {
       this.remove(this.zoomBox);
     }
     this.add(this.zoomBox = box);
-    box.position.x = xOff;
-    box.position.z = yOff;
+    box.position.x = (viewWidth / -2) - xOff + depth;
+    box.position.z = -((viewDepth / -2) - yOff + depth);
   }
 
 

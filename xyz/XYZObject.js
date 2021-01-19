@@ -51,7 +51,7 @@ function toShape(geometry) {
   geometry.computeBoundingBox();
   const bb = geometry.boundingBox;
   const bounds = [bb.min.x, bb.min.y, bb.max.x, bb.max.y];
-  //geometry.center();
+  geometry.center();
   const xyzArr = geometry.attributes.position.array;
   let numX = 0;
   let firstY = xyzArr[1]; // TODO: assumes data sorted by Y
@@ -72,13 +72,11 @@ function toShape(geometry) {
   geom2.computeFaceNormals();
   geom2.computeVertexNormals();
   const obj = new THREE.Mesh(geom2, new THREE.MeshPhongMaterial({
-    color: 'green',
-    shininess: 10,
+    color: 'green', side: THREE.DoubleSide, shininess: 10
   }));
   obj.receiveShadow = true;
   obj.bounds = bounds;
   obj.rotateX(Math.PI / -2);
-  obj.position.setY(-bb.min.z - (bb.max.z - bb.min.z) / 2);
   return obj;
 }
 
@@ -90,7 +88,11 @@ function transferZ(vertsA, vertsB) {
   if (vertsA.length % 3 != 0)
     throw new Error('Buffer length must be divisible by 3');
   for (let i = 0; i < vertsA.length; i += 3) {
+    const xi = i;
+    const yi = i + 1;
     const zi = i + 2;
+    vertsB[xi] = vertsA[xi];
+    vertsB[yi] = vertsA[yi];
     vertsB[zi] = vertsA[zi];
   }
 }
