@@ -5,10 +5,12 @@ import XYZObject from './XYZObject.js';
 
 const controls = new Controls();
 const view = new View();
+//const xyzObj = new XYZObject('test.xyz', obj => {
 const xyzObj = new XYZObject('sample.xyz', obj => {
-    view.setObj(obj);
-    controls.init(obj.shape.bounds, zoomBounds => {
-        view.focus(zoomBounds);
+    view.displayXYZObject(obj);
+    controls.init(obj.shape.bounds, zoom => {
+        view.focus(zoom);
+        //xyzObj.showSection(zoom.Xmin, zoom.Xmax, zoom.Ymin, zoom.Ymax);
       });
   });
 

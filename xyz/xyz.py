@@ -17,8 +17,8 @@ parser.add_argument('-xmax', type=int, default=float('inf'))
 parser.add_argument('-ymax', type=int, default=float('inf'))
 args = parser.parse_args()
 
-# Open the source file, read every line of the are in the bounding box
-# and append the coordinates.
+# Open the source file, read every line of the area in the bounding
+# box and append the coordinates.
 coordinates = []
 for line in args.infile:
   line = line.strip()

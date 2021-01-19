@@ -1,11 +1,12 @@
 /**
- * Sets up the input sliders and text fields with min/max bounds.
+ * Setup the input sliders and text fields with min/max bounds.
  */
 export default class Controls {
   constructor() {}
 
-  init(viewBounds, cb) {
-    this.cb = cb;
+
+  init(viewBounds, onZoomChangeCb) {
+    this.onZoomChangeCb = onZoomChangeCb;
     const minX = viewBounds[0];
     const minY = viewBounds[1];
     const maxX = viewBounds[2];
@@ -44,7 +45,7 @@ export default class Controls {
       };
     }
     requestAnimationFrame(() => {
-        this.cb(boxBounds);
+        this.onZoomChangeCb(boxBounds);
       })
   }
 
