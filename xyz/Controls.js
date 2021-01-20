@@ -39,7 +39,6 @@ export default class Controls {
 
 
   processBounds(bounds, button) {
-    // TODO: check for 0, safeguard against strings in inputs
     let boxBounds = bounds;
     let isBoundsValid = false;
     if (bounds.hasOwnProperty('Radius')) {
@@ -88,7 +87,7 @@ export default class Controls {
     }
     const bounds = {};
     for (let propName in params) {
-      bounds[propName] = 0;
+      bounds[propName] = params[propName][0];
     }
     const button = form.querySelector('.button');
     form.onSlider = (sliderElt, propName) => {
@@ -107,7 +106,6 @@ export default class Controls {
         inVal = 0;
       }
       bounds[propName] = inVal;
-      //console.log(`inVal(${inVal}, type(${typeof inVal}))`);
       form[propName + '-slider'].value = (inVal - min) / (max - min) * 100;
       this.processBounds(bounds, button);
     }
@@ -117,8 +115,7 @@ export default class Controls {
       const min = params[propName][0];
       const max = params[propName][1];
       const value = bounds[propName];
-      const sliderValue = 0;//value / maxValue * 100;
-      //console.log('sliderValue:', sliderValue);
+      const sliderValue = 0;
       controlsTable.innerHTML +=
         `<tr>
            <td>${propName}:</td>
