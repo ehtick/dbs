@@ -65,7 +65,7 @@ function toShape(xyzArr, bounds) {
   geom2.computeFaceNormals();
   geom2.computeVertexNormals();
   const obj = new THREE.Mesh(geom2, new THREE.MeshPhongMaterial({
-    color: 'green', side: THREE.DoubleSide, shininess: 10
+    color: 'green', side: THREE.DoubleSide, shininess: 10, wireframe: true
   }));
   obj.receiveShadow = true;
   obj.bounds = bounds;

@@ -92,7 +92,7 @@ export default class View extends THREE.Scene {
     wireBox.castShadow = false;
     wireBox.receiveShadow = false;
     wireBox.material = new THREE.MeshBasicMaterial({
-        color: 0xccccff, wireframe: true, transparent: true, opacity: zoomBoxOpacity});
+        color: 0xccccff, transparent: true, opacity: zoomBoxOpacity, wireframe: true});
     box.add(wireBox);
     if (this.zoomBox) {
       this.remove(this.zoomBox);

@@ -52,3 +52,22 @@ button {
   font-size: small;
   color: #555;
 }
+
+
+.button {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #eeeeee;
+  color: lightgrey;
+  margin-top: 5px;
+  padding: 4px;
+  border: 1px solid lightgrey;
+  border-bottom: 1px solid darkgrey;
+  border-right: 1px solid darkgrey;
+}
+
+
+.button[href] {
+  background-color: #00ff00;
+  color: white;
+}

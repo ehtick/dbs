@@ -38,13 +38,15 @@ export default class Controls {
   }
 
 
-  processBounds(bounds) {
+  processBounds(bounds, button) {
     // TODO: check for 0, safeguard against strings in inputs
     let boxBounds = bounds;
+    let isBoundsValid = false;
     if (bounds.hasOwnProperty('Radius')) {
-      if (Number.isFinite(bounds.X)
-          && Number.isFinite(bounds.Y)
-          && Number.isFinite(bounds.Radius)) {
+      if (gte(bounds.X)
+          && gte(bounds.Y)
+          && Number.isFinite(bounds.Radius)
+          && bounds.Radius > 0) {
         const x = parseFloat(bounds.X);
         const y = parseFloat(bounds.Y);
         const r = parseFloat(bounds.Radius);
@@ -54,18 +56,28 @@ export default class Controls {
           Xmax: bounds.X + r,
           Ymax: bounds.Y + r
         };
+        this.activateDownloadButton(button, bounds);
+        isBoundsValid = true;
+      } else {
+        this.deactivateDownloadButton(button);
       }
     } else {
-      if (Number.isFinite(bounds.Xmin)
-          && Number.isFinite(bounds.Ymin)
-          && Number.isFinite(bounds.Xmax)
-          && Number.isFinite(bounds.Ymax)) {
+      if (gte(bounds.Xmin)
+          && gte(bounds.Ymin)
+          && gt(bounds.Xmax, bounds.Xmin)
+          && gt(bounds.Ymax, bounds.Ymin)) {
         this.userSelection = bounds;
+        this.activateDownloadButton(button, bounds);
+        isBoundsValid = true;
+      } else {
+        this.deactivateDownloadButton(button);
       }
     }
-    requestAnimationFrame(() => {
-        this.onZoomChangeCb(this.userSelection);
-      })
+    if (isBoundsValid) {
+      requestAnimationFrame(() => {
+          this.onZoomChangeCb(this.userSelection);
+        });
+    }
   }
 
 
@@ -78,12 +90,13 @@ export default class Controls {
     for (let propName in params) {
       bounds[propName] = 0;
     }
+    const button = form.querySelector('.button');
     form.onSlider = (sliderElt, propName) => {
       const min = params[propName][0];
       const max = params[propName][1];
       const value = min + (sliderElt.value / 100 * (max - min));
       bounds[propName] = parseFloat(form[propName].value = value);
-      this.processBounds(bounds);
+      this.processBounds(bounds, button);
     }
     form.onInput = (inputElt, propName) => {
       const min = params[propName][0];
@@ -96,10 +109,9 @@ export default class Controls {
       bounds[propName] = inVal;
       //console.log(`inVal(${inVal}, type(${typeof inVal}))`);
       form[propName + '-slider'].value = (inVal - min) / (max - min) * 100;
-      this.processBounds(bounds);
+      this.processBounds(bounds, button);
     }
     const controlsTable = document.createElement('table');
-    const button = form.querySelector('#downloadButton');
     form.insertBefore(controlsTable, button);
     for (let propName in params) {
       const min = params[propName][0];
@@ -119,17 +131,46 @@ export default class Controls {
            </td>
          </tr>`;
     }
+  }
+
+
+  activateDownloadButton(button, bounds) {
     button.onclick = () => {
-      this.processBounds(bounds);
+      this.processBounds(bounds, button);
       const fileContent = this.xyzObject.extractSectionAsXYZ(this.userSelection);
       const data = new Blob([fileContent], {type: 'text/plain'});
       const url = window.URL.createObjectURL(data);
       button.href = url;
     }
+    button.setAttribute('href', '');
+  }
+
+
+  deactivateDownloadButton(button) {
+    button.onclick = null;
+    button.removeAttribute('href');
   }
 }
 
 
 function clip(min, max, val) {
   return Math.min(Math.max(val, min), max);
+}
+
+
+/** @return true Iff a is a finite number and a > b. */
+function gt(a, b) {
+  if (b === undefined) {
+    b = 0;
+  }
+  return Number.isFinite(a) && a > b;
+}
+
+
+/** @return true Iff a is a finite number and a > b. */
+function gte(a, b) {
+  if (b === undefined) {
+    b = 0;
+  }
+  return Number.isFinite(a) && a >= b;
 }

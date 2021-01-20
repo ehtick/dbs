@@ -5,8 +5,8 @@ import XYZObject from './XYZObject.js';
 
 const controls = new Controls();
 const view = new View();
-//const xyzObj = new XYZObject('test.xyz', obj => {
-const xyzObj = new XYZObject('sample.xyz', obj => {
+const xyzObj = new XYZObject('test.xyz', obj => {
+    //const xyzObj = new XYZObject('sample.xyz', obj => {
     view.displayXYZObject(obj);
     controls.setXYZObject(xyzObj);
     controls.init(obj.shape.bounds, zoom => {
