@@ -7,34 +7,32 @@ export default class XYZObject extends THREE.Object3D {
   constructor(xyzFilename, cb) {
     super();
     new XYZLoader().load(xyzFilename, geometry => {
-        const xyzShape = toShape(geometry);
-        this.add(xyzShape);
-        this.shape = xyzShape;
+        this.origArr = [...geometry.attributes.position.array];
+        geometry.computeBoundingBox();
+        const bb = geometry.boundingBox;
+        const bounds = [bb.min.x, bb.min.y, bb.max.x, bb.max.y];
+        geometry.center();
+        this.shape = toShape(geometry.attributes.position.array, bounds);
+        this.add(this.shape);
         cb(this);
     });
     this.section = null;
   }
 
 
-  cutSection(xMin, xMax, yMin, yMax) {
-    console.log('cutting from shape: ', this.shape.geometry);
-    //const section = cutSection(this.shape.geometry.attributes.position.array, xMin, xMax, yMin, yMax);
-    const width = xMax - xMin, height = yMax - yMin;
-    const secGeom = new THREE.PlaneBufferGeometry(width, height, width - 1, height - 1);
-    //const position = secGeom.getAttribute('position');
-    //const vertices = position.array;
-    /*
-    console.log('section:', section);
-    transferZ(section, vertices);*/
-    const shape = new THREE.Mesh(secGeom, new THREE.MeshPhongMaterial({
-          color: 'white',
-          wireframe: true,
-          side: THREE.DoubleSide,
-          transparent: true,
-          depthTest: true,
-          opacity: 0.5
-        }));
-    return shape;
+  extractSectionAsXYZ(s) {
+    const arr = this.origArr;
+    const lines = [`# ${new Date()}, exported from XYZ tool`];
+    for (let i = 0; i < arr.length; i += 3) {
+      const x = arr[i], y = arr[i + 1], z = arr[i + 2];
+      //console.log(`evaling: ${x} ${y} ${z}`);
+      if (x < s.Xmin || y < s.Ymin || x > s.Xmax || y > s.Ymax) {
+        continue;
+      }
+      lines.push(`${x} ${y} ${z}`);
+    }
+    lines.push('');
+    return lines.join('\n');
   }
 
 
@@ -47,12 +45,7 @@ export default class XYZObject extends THREE.Object3D {
 }
 
 
-function toShape(geometry) {
-  geometry.computeBoundingBox();
-  const bb = geometry.boundingBox;
-  const bounds = [bb.min.x, bb.min.y, bb.max.x, bb.max.y];
-  geometry.center();
-  const xyzArr = geometry.attributes.position.array;
+function toShape(xyzArr, bounds) {
   let numX = 0;
   let firstY = xyzArr[1]; // TODO: assumes data sorted by Y
   for (let i = 3; i < xyzArr.length; i+=3) {

@@ -70,6 +70,8 @@ export default class View extends THREE.Scene {
 
 
   focus(zoomBounds) {
+    if (zoomBounds == null)
+      throw new Error('zoomBounds null');
     const viewBounds = this.xyzObj.children[0].bounds;
     const viewWidth = viewBounds[2] - viewBounds[0];
     const viewDepth = viewBounds[3] - viewBounds[1];

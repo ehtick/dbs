@@ -29,23 +29,42 @@ export default class Controls {
       Ymax: [minY, maxY]
     };
     this.setupFormControls('box', boxParams);
+    this.userSelection = null;
+  }
+
+
+  setXYZObject(xyzObject) {
+    this.xyzObject = xyzObject;
   }
 
 
   processBounds(bounds) {
     // TODO: check for 0, safeguard against strings in inputs
     let boxBounds = bounds;
-    if (Number.isFinite(bounds.Radius)) {
-      const r = parseFloat(bounds.Radius);
-      boxBounds = {
-        Xmin: bounds.X - r,
-        Ymin: bounds.Y - r,
-        Xmax: bounds.X + r,
-        Ymax: bounds.Y + r
-      };
+    if (bounds.hasOwnProperty('Radius')) {
+      if (Number.isFinite(bounds.X)
+          && Number.isFinite(bounds.Y)
+          && Number.isFinite(bounds.Radius)) {
+        const x = parseFloat(bounds.X);
+        const y = parseFloat(bounds.Y);
+        const r = parseFloat(bounds.Radius);
+        this.userSelection = {
+          Xmin: bounds.X - r,
+          Ymin: bounds.Y - r,
+          Xmax: bounds.X + r,
+          Ymax: bounds.Y + r
+        };
+      }
+    } else {
+      if (Number.isFinite(bounds.Xmin)
+          && Number.isFinite(bounds.Ymin)
+          && Number.isFinite(bounds.Xmax)
+          && Number.isFinite(bounds.Ymax)) {
+        this.userSelection = bounds;
+      }
     }
     requestAnimationFrame(() => {
-        this.onZoomChangeCb(boxBounds);
+        this.onZoomChangeCb(this.userSelection);
       })
   }
 
@@ -80,7 +99,7 @@ export default class Controls {
       this.processBounds(bounds);
     }
     const controlsTable = document.createElement('table');
-    const button = form.querySelector('button');
+    const button = form.querySelector('#downloadButton');
     form.insertBefore(controlsTable, button);
     for (let propName in params) {
       const min = params[propName][0];
@@ -102,7 +121,10 @@ export default class Controls {
     }
     button.onclick = () => {
       this.processBounds(bounds);
-      return false;
+      const fileContent = this.xyzObject.extractSectionAsXYZ(this.userSelection);
+      const data = new Blob([fileContent], {type: 'text/plain'});
+      const url = window.URL.createObjectURL(data);
+      button.href = url;
     }
   }
 }

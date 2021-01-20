@@ -8,9 +8,9 @@ const view = new View();
 //const xyzObj = new XYZObject('test.xyz', obj => {
 const xyzObj = new XYZObject('sample.xyz', obj => {
     view.displayXYZObject(obj);
+    controls.setXYZObject(xyzObj);
     controls.init(obj.shape.bounds, zoom => {
         view.focus(zoom);
-        //xyzObj.showSection(zoom.Xmin, zoom.Xmax, zoom.Ymin, zoom.Ymax);
       });
   });
 
