@@ -69,19 +69,34 @@ export default class View extends THREE.Scene {
   }
 
 
-  focus(zoomBounds) {
-    if (zoomBounds == null)
-      throw new Error('zoomBounds null');
-    const viewBounds = this.xyzObj.children[0].bounds;
-    const viewWidth = viewBounds[2] - viewBounds[0];
-    const viewDepth = viewBounds[3] - viewBounds[1];
-    const xOff = viewBounds[0] - zoomBounds.Xmin;
-    const yOff = viewBounds[1] - zoomBounds.Ymin;
-    const width = Math.max(1, zoomBounds.Xmax - zoomBounds.Xmin) / 2;
-    const height = 20; // TODO: get it from xyz height?
-    const depth = Math.max(1, zoomBounds.Ymax - zoomBounds.Ymin) / 2;
-    //console.log(`width(${width}) depth(${depth})`, viewBounds, zoomBounds);
-    const geometry = new THREE.BoxGeometry(width, height, depth);
+  focus(zoomBoundsIn) {
+    if (zoomBoundsIn == null) {
+      throw new Error('zoomBoundsIn null');
+    }
+    const zoomBounds = {
+      min: { x: zoomBoundsIn.Xmin, y: zoomBoundsIn.Ymin },
+      max: { x: zoomBoundsIn.Xmax, y: zoomBoundsIn.Ymax }
+    };
+    const sourceBounds = this.xyzObj.children[0].sourceBounds;
+    const sourceWidth = sourceBounds.max.x - sourceBounds.min.x;
+    const sourceDepth = sourceBounds.max.y - sourceBounds.min.y;
+    const viewBounds = this.xyzObj.children[0].viewBounds;
+    const viewWidth = viewBounds.max.x - viewBounds.min.x;
+    const viewDepth = viewBounds.max.y - viewBounds.min.y;
+    const viewXOff = viewBounds.min.x;
+    const viewYOff = viewBounds.min.y;
+    const zoomX = zoomBounds.min.x;
+    const zoomY = zoomBounds.min.y;
+    const zoomWidth = zoomBounds.max.x - zoomBounds.min.x;
+    const zoomDepth = zoomBounds.max.y - zoomBounds.min.y;
+    const ZOOM_EXTRA = 1;
+    const zoomHeight = viewBounds.max.z - viewBounds.min.z + ZOOM_EXTRA;
+    const boxX = zoomX - sourceBounds.min.x;
+    const boxY = zoomY - sourceBounds.min.y;
+    const boxWidth = zoomWidth / sourceWidth * viewWidth;
+    const boxHeight = zoomHeight;
+    const boxDepth = zoomDepth / sourceDepth * viewDepth;
+    const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
     geometry.center();
     const material = new THREE.MeshBasicMaterial({
         color: 0xffffff, transparent: true, opacity: zoomBoxOpacity});
@@ -98,8 +113,16 @@ export default class View extends THREE.Scene {
       this.remove(this.zoomBox);
     }
     this.add(this.zoomBox = box);
-    box.position.x = (viewWidth / -2) - xOff + depth;
-    box.position.z = -((viewDepth / -2) - yOff + depth);
+    function b2s(name, b) {
+      return `${name}(min: x:${b.min.x} y:${b.min.y} z:${b.min.z} max: x:${b.max.x} y:${b.max.y} z:${b.max.z})`;
+    }
+    box.position.x = viewXOff + boxX + boxWidth - (boxWidth / 2);
+    // Note y swapped to z.
+    box.position.z = -viewYOff - boxY - boxDepth + (boxDepth / 2);
+    box.position.y -= (ZOOM_EXTRA / 2);
+    /*console.log(`box(x: ${boxX} y:${boxY} w:${boxWidth} h:${boxHeight} d:${boxDepth})`,
+                b2s('source', sourceBounds), b2s('view', viewBounds), b2s('zoom', zoomBounds),
+                box.position);*/
   }
 
 

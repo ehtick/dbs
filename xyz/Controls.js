@@ -14,12 +14,12 @@ export default class Controls {
   }
 
 
-  init(viewBounds, onZoomChangeCb) {
+  init(sourceBounds, viewBounds, onZoomChangeCb) {
     this.onZoomChangeCb = onZoomChangeCb;
-    const minX = viewBounds[0];
-    const minY = viewBounds[1];
-    const maxX = viewBounds[2];
-    const maxY = viewBounds[3];
+    const minX = sourceBounds.min.x;
+    const minY = sourceBounds.min.y;
+    const maxX = sourceBounds.max.x;
+    const maxY = sourceBounds.max.y;
     const width = maxX - minX;
     const height = maxY - minY;
     const maxRadius = Math.min(width, height);

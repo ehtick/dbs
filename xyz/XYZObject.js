@@ -8,11 +8,11 @@ export default class XYZObject extends THREE.Object3D {
     super();
     new XYZLoader().load(xyzFilename, geometry => {
         this.origArr = [...geometry.attributes.position.array];
+        const sourceBounds = new THREE.Box3;
         geometry.computeBoundingBox();
-        const bb = geometry.boundingBox;
-        const bounds = [bb.min.x, bb.min.y, bb.max.x, bb.max.y];
+        sourceBounds.copy(geometry.boundingBox);
         geometry.center();
-        this.shape = toShape(geometry.attributes.position.array, bounds);
+        this.shape = toShape(geometry.attributes.position.array, sourceBounds);
         this.add(this.shape);
         cb(this);
     });
@@ -45,7 +45,7 @@ export default class XYZObject extends THREE.Object3D {
 }
 
 
-function toShape(xyzArr, bounds) {
+function toShape(xyzArr, sourceBounds) {
   let numX = 0;
   let firstY = xyzArr[1]; // TODO: assumes data sorted by Y
   for (let i = 3; i < xyzArr.length; i+=3) {
@@ -61,21 +61,23 @@ function toShape(xyzArr, bounds) {
   const geom2 = new THREE.PlaneBufferGeometry(width, height, numX - 1, numY - 1);
   const position = geom2.getAttribute('position');
   const vertices = position.array;
-  transferZ(xyzArr, vertices);
+  // TODO: there's probably methods in Geometry to do this.
+  transferXYZ(xyzArr, vertices);
+  geom2.computeBoundingBox();
   geom2.computeFaceNormals();
   geom2.computeVertexNormals();
   const obj = new THREE.Mesh(geom2, new THREE.MeshPhongMaterial({
     color: 'green', side: THREE.DoubleSide, shininess: 10, wireframe: false
   }));
   obj.receiveShadow = true;
-  obj.bounds = bounds;
+  obj.sourceBounds = sourceBounds;
+  obj.viewBounds = geom2.boundingBox;
   obj.rotateX(Math.PI / -2);
   return obj;
 }
 
 
-// https://blog.mastermaps.com/2013/10/terrain-building-with-threejs.html
-function transferZ(vertsA, vertsB) {
+function transferXYZ(vertsA, vertsB) {
   if (vertsA.length != vertsB.length)
     throw new Error(`vertsA.length: ${vertsA.length} != vertsB.length: ${vertsB.length}`);
   if (vertsA.length % 3 != 0)

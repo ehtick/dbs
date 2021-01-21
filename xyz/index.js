@@ -11,12 +11,13 @@ const sources = [{
     displayText: 'Test points',
     filename: 'test.xyz'
   }];
-const controls = new Controls(sources);
+const testSources = [sources[0]];
+const controls = new Controls(testSources);
 const view = new View();
-const xyzObj = new XYZObject(sources[0].filename, obj => {
+const xyzObj = new XYZObject(testSources[0].filename, obj => {
     view.displayXYZObject(obj);
     controls.setXYZObject(xyzObj);
-    controls.init(obj.shape.bounds, zoom => {
+    controls.init(obj.shape.sourceBounds, obj.shape.viewBounds, zoom => {
         view.focus(zoom);
       });
   });
