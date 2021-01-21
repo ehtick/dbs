@@ -53,6 +53,9 @@ export default class View extends THREE.Scene {
         this.onWindowResize();
       });
     this.onWindowResize();
+    window.addEventListener('resize', () => {
+        this.onWindowResize();
+      });
     this.animate();
     document.view = this;
     this.zoomBox = null;
