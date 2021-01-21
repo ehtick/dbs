@@ -22,7 +22,7 @@ export default class Controls {
     const maxY = sourceBounds.max.y;
     const width = maxX - minX;
     const height = maxY - minY;
-    const maxRadius = Math.min(width, height);
+    const maxRadius = Math.max(width, height) / 2;
     // These max values must be >0 and a number.
     const radiusParams = {
       X: [minX, maxX],
