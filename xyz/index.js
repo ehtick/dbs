@@ -2,11 +2,18 @@ import Controls from './Controls.js';
 import View from './View.js';
 import XYZObject from './XYZObject.js';
 
-
-const controls = new Controls();
+/** Currently control options are just for display. */
+const sources = [{
+    displayText: 'Canton Zürich',
+    filename: 'zurich-sample.xyz'
+  },
+  {
+    displayText: 'Test points',
+    filename: 'test.xyz'
+  }];
+const controls = new Controls(sources);
 const view = new View();
-const xyzObj = new XYZObject('test.xyz', obj => {
-    //const xyzObj = new XYZObject('sample.xyz', obj => {
+const xyzObj = new XYZObject(sources[0].filename, obj => {
     view.displayXYZObject(obj);
     controls.setXYZObject(xyzObj);
     controls.init(obj.shape.bounds, zoom => {
@@ -16,8 +23,6 @@ const xyzObj = new XYZObject('test.xyz', obj => {
 
 function handleHash() {
   let hash = location.hash.substr(1);
-  //console.log('hash arg:', hash)
-  //loader.loadPath(hash, onLoadCb, onDoneCb);
 }
 window.addEventListener('hashchange', handleHash);
 handleHash();

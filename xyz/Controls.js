@@ -2,7 +2,16 @@
  * Setup the input sliders and text fields with min/max bounds.
  */
 export default class Controls {
-  constructor() {}
+  constructor(sources) {
+    const selectElt = document.querySelector("select[name='sources']");
+    for (let i = 0; i < sources.length; i++) {
+      const source = sources[i];
+      const optionElt = document.createElement('option');
+      optionElt.setAttribute('value', source.filename);
+      optionElt.innerText = source.displayText;
+      selectElt.appendChild(optionElt);
+    }
+  }
 
 
   init(viewBounds, onZoomChangeCb) {
