@@ -102,8 +102,9 @@ export default class Controls {
     form.onSlider = (sliderElt, propName) => {
       const min = params[propName][0];
       const max = params[propName][1];
-      const value = min + (sliderElt.value / 100 * (max - min));
-      bounds[propName] = parseFloat(form[propName].value = value);
+      const value = parseFloat((min + (sliderElt.value / 100 * (max - min))).toFixed(2));
+      bounds[propName] = value;
+      form[propName].value = value;
       this.processBounds(bounds, button);
     }
     form.onInput = (inputElt, propName) => {
@@ -115,7 +116,7 @@ export default class Controls {
         inVal = 0;
       }
       bounds[propName] = inVal;
-      form[propName + '-slider'].value = (inVal - min) / (max - min) * 100;
+      form[propName + '-slider'].value = ((inVal - min) / (max - min) * 100).toFixed(2);
       this.processBounds(bounds, button);
     }
     const controlsTable = document.createElement('table');
