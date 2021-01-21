@@ -57,10 +57,10 @@ button {
 .button {
   display: inline-block;
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #eee;
   color: lightgrey;
   margin-top: 5px;
-  padding: 4px;
+  padding: 5px;
   border: 1px solid lightgrey;
   border-bottom: 1px solid darkgrey;
   border-right: 1px solid darkgrey;
@@ -68,6 +68,6 @@ button {
 
 
 .button[href] {
-  background-color: #00ff00;
+  background-color: green;
   color: white;
 }
