@@ -4,7 +4,7 @@ import XYZObject from './XYZObject.js';
 
 /** Currently control options are just for display. */
 const sources = [{
-    displayText: 'Canton Zürich',
+    displayText: 'Canton Zürich (sample)',
     filename: 'zurich-sample.xyz'
   },
   {
