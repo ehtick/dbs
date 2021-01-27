@@ -3,15 +3,20 @@ import View from './View.js';
 import XYZObject from './XYZObject.js';
 
 /** Currently control options are just for display. */
-const sources = [{
+const sources = [
+  {
     displayText: 'Canton Zürich (sample)',
     filename: 'zurich-sample.xyz'
+  },
+  {
+    displayText: 'Astra',
+    filename: 'DTM_GRID_XYZ.xyz'
   },
   {
     displayText: 'Test points',
     filename: 'test.xyz'
   }];
-const testSources = [sources[0]];
+const testSources = [sources[1]];
 const controls = new Controls(testSources);
 const view = new View();
 const xyzObj = new XYZObject(testSources[0].filename, obj => {
