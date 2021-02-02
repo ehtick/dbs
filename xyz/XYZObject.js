@@ -1,5 +1,6 @@
 import * as THREE from '../js/lib/three.js/three.module.js';
 import {XYZLoader} from '../js/lib/three.js/XYZLoader.js';
+import XYZArray from './XYZArray.js';
 
 
 /** Scene object to view XYZ file. */
@@ -8,11 +9,13 @@ export default class XYZObject extends THREE.Object3D {
     super();
     new XYZLoader().load(xyzFilename, geometry => {
         this.origArr = [...geometry.attributes.position.array];
+        this.srcArr = new XYZArray(this.origArr);
         const sourceBounds = new THREE.Box3;
         geometry.computeBoundingBox();
+        //geometry.center();
         sourceBounds.copy(geometry.boundingBox);
-        geometry.center();
-        this.shape = toShape(geometry.attributes.position.array, sourceBounds);
+        //this.shape = toShape(this.srcArr, sourceBounds);
+        this.shape = toPointsShape(this.srcArr.sourceArray, sourceBounds);
         this.add(this.shape);
         cb(this);
     });
@@ -45,24 +48,48 @@ export default class XYZObject extends THREE.Object3D {
 }
 
 
-function toShape(xyzArr, sourceBounds) {
-  let numX = 0;
-  let firstY = xyzArr[1]; // TODO: assumes data sorted by Y
-  for (let i = 3; i < xyzArr.length; i+=3) {
-    const yi = i + 1;
-    const y = xyzArr[yi];
-    if (y != firstY) {
-      numX = i / 3;
-      break;
-    }
+function toPointsShape(xyzArr, sourceBounds) {
+  const numPoints = xyzArr.length / 3;
+  const coords = new Float32Array(xyzArr.length);
+  const colors = new Float32Array(xyzArr.length);
+  const sizes = new Float32Array(numPoints);
+  for (let i = 0; i < xyzArr.length; i += 3) {
+    const xi = i, yi = i + 1, zi = i + 2;
+    coords[xi] = xyzArr[xi];
+    coords[yi] = xyzArr[yi];
+    coords[zi] = xyzArr[zi];
+    colors[yi] = 0xff;
+    sizes[i / 3] = 1;
   }
-  const numY = xyzArr.length / 3 / numX;
-  const [height, width] = getDimensions(xyzArr);
-  const geom2 = new THREE.PlaneBufferGeometry(width, height, numX - 1, numY - 1);
+  const geom = new THREE.BufferGeometry();
+  geom.setAttribute('position', new THREE.BufferAttribute(coords, 3));
+  //geom.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  geom.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+  geom.computeBoundingBox();
+  geom.center();
+  const groundMaterial = new THREE.PointsMaterial({
+    color: 0x008800,
+    sizeAttenuation: false,
+    size: 1
+  });
+  const groundPoints = new THREE.Points(geom, groundMaterial);
+  groundPoints.sortParticles = true;
+  groundPoints.sourceBounds = sourceBounds;
+  groundPoints.viewBounds = geom.boundingBox;
+  groundPoints.rotateX(Math.PI / -2);
+  return groundPoints;
+}
+
+
+function toShape(xyzArr, sourceBounds) {
+  const [numX, numY] = xyzArr.computeArrayShape();
+  //console.log(`numX:${numX} numY:${numY}`);
+  const geom2 = new THREE.PlaneBufferGeometry(numX, numY, numX - 1, numY - 1);
   const position = geom2.getAttribute('position');
   const vertices = position.array;
   // TODO: there's probably methods in Geometry to do this.
-  transferXYZ(xyzArr, vertices);
+  xyzArr.transferXYZ(vertices);
+  geom2.center();
   geom2.computeBoundingBox();
   geom2.computeFaceNormals();
   geom2.computeVertexNormals();
@@ -74,22 +101,6 @@ function toShape(xyzArr, sourceBounds) {
   obj.viewBounds = geom2.boundingBox;
   obj.rotateX(Math.PI / -2);
   return obj;
-}
-
-
-function transferXYZ(vertsA, vertsB) {
-  if (vertsA.length != vertsB.length)
-    throw new Error(`vertsA.length: ${vertsA.length} != vertsB.length: ${vertsB.length}`);
-  if (vertsA.length % 3 != 0)
-    throw new Error('Buffer length must be divisible by 3');
-  for (let i = 0; i < vertsA.length; i += 3) {
-    const xi = i;
-    const yi = i + 1;
-    const zi = i + 2;
-    vertsB[xi] = vertsA[xi];
-    vertsB[yi] = vertsA[yi];
-    vertsB[zi] = vertsA[zi];
-  }
 }
 
 
@@ -108,24 +119,4 @@ function cutSection(xyz, xMin, xMax, yMin, yMax) {
     }
   }
   return out;
-}
-
-
-function getDimensions(xyz) {
-  if (xyz.length < 3) {
-    throw new Error('Empty data');
-  }
-  let width, height;
-  let y0 = xyz[1];
-  for (let i = 0; i < xyz.length; i+=3) {
-    const x = xyz[i];
-    const y = xyz[i + 1];
-    const z = xyz[i + 2];
-    if (y != y0) {
-      height = i / 3;
-      width = (xyz.length / 3) / height;
-      break;
-    }
-  }
-  return [width, height];
 }

@@ -81,6 +81,7 @@ export default class Controls {
         this.deactivateDownloadButton(button);
       }
     }
+    console.log(bounds);
     if (isBoundsValid) {
       requestAnimationFrame(() => {
           this.onZoomChangeCb(this.userSelection);
