@@ -16,7 +16,7 @@ const sources = [
     displayText: 'Test points',
     filename: 'test.xyz'
   }];
-const testSources = [sources[0]];
+const testSources = [sources[1]];
 const controls = new Controls(testSources);
 const view = new View();
 const xyzObj = new XYZObject(testSources[0].filename, obj => {
