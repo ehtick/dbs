@@ -1,0 +1,149 @@
+/Users/pablo/http
+net.http.Server.port=8080
+net.http.Server.log=true
+net.http.Server.index=index.html
+net.http.Server.ssl=false
+MIME: text/html
+Tue, 02 Feb 2021 05:05:33 GMT 200 path(xyz/index.html)
+HTTP/1.0 200 OK
+Content-Length: 985
+Content-Type: text/html; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:33 GMT
+
+
+
+MIME: text/css
+Tue, 02 Feb 2021 05:05:33 GMT 200 path(xyz/normalize.css)
+HTTP/1.0 200 OK
+Content-Length: 6138
+Content-Type: text/css; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:33 GMT
+
+
+
+MIME: text/css
+Tue, 02 Feb 2021 05:05:33 GMT 200 path(xyz/index.css)
+HTTP/1.0 200 OK
+Content-Length: 844
+Content-Type: text/css; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:33 GMT
+
+
+
+MIME: text/javascript
+Tue, 02 Feb 2021 05:05:33 GMT 200 path(xyz/index.js)
+HTTP/1.0 200 OK
+Content-Length: 883
+Content-Type: text/javascript; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:33 GMT
+
+
+
+MIME: text/javascript
+Tue, 02 Feb 2021 05:05:33 GMT 200 path(xyz/Controls.js)
+HTTP/1.0 200 OK
+Content-Length: 5394
+Content-Type: text/javascript; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:33 GMT
+
+
+
+MIME: text/javascript
+Tue, 02 Feb 2021 05:05:33 GMT 200 path(xyz/View.js)
+HTTP/1.0 200 OK
+Content-Length: 5426
+Content-Type: text/javascript; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:33 GMT
+
+
+
+MIME: text/javascript
+Tue, 02 Feb 2021 05:05:33 GMT 200 path(xyz/XYZObject.js)
+HTTP/1.0 200 OK
+Content-Length: 3570
+Content-Type: text/javascript; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:33 GMT
+
+
+
+MIME: text/javascript
+Tue, 02 Feb 2021 05:05:34 GMT 200 path(js/lib/three.js/three.module.js)
+HTTP/1.0 200 OK
+Content-Length: 1201103
+Content-Type: text/javascript; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:34 GMT
+
+
+
+MIME: text/javascript
+Tue, 02 Feb 2021 05:05:34 GMT 200 path(js/lib/three.js/OrbitControls.js)
+HTTP/1.0 200 OK
+Content-Length: 25251
+Content-Type: text/javascript; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:34 GMT
+
+
+
+MIME: text/javascript
+Tue, 02 Feb 2021 05:05:34 GMT 200 path(js/fullscreen.js)
+HTTP/1.0 200 OK
+Content-Length: 2369
+Content-Type: text/javascript; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:34 GMT
+
+
+
+MIME: text/javascript
+Tue, 02 Feb 2021 05:05:34 GMT 200 path(js/lib/three.js/XYZLoader.js)
+HTTP/1.0 200 OK
+Content-Length: 1807
+Content-Type: text/javascript; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:34 GMT
+
+
+
+MIME: application/octet
+Tue, 02 Feb 2021 05:05:34 GMT 200 path(xyz/zurich-sample.xyz)
+HTTP/1.0 200 OK
+Content-Length: 543627
+Content-Type: application/octet; charset=UTF-8
+Cache-Control: private, max-age=0
+Expires: -1
+Server: yo
+Date: Tue, 02 Feb 2021 05:05:34 GMT
+
+
+
