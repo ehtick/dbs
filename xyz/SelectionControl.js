@@ -1,20 +1,9 @@
 /**
  * Setup the input sliders and text fields with min/max bounds.
  */
-export default class Controls {
-  constructor(sources) {
-    const selectElt = document.querySelector("select[name='sources']");
-    for (let i = 0; i < sources.length; i++) {
-      const source = sources[i];
-      const optionElt = document.createElement('option');
-      optionElt.setAttribute('value', source.filename);
-      optionElt.innerText = source.displayText;
-      selectElt.appendChild(optionElt);
-    }
-  }
-
-
-  init(sourceBounds, viewBounds, onZoomChangeCb) {
+export default class SelectionControl {
+  constructor(xyzObject, sourceBounds, viewBounds, onZoomChangeCb) {
+    this.xyzObject = xyzObject;
     this.onZoomChangeCb = onZoomChangeCb;
     const minX = sourceBounds.min.x;
     const minY = sourceBounds.min.y;
@@ -29,7 +18,7 @@ export default class Controls {
       Y: [minY, maxY],
       Radius: [0, maxRadius]
     };
-    this.setupFormControls('radius', radiusParams);
+    this.setupForm('radius', radiusParams);
 
     const boxParams = {
       Xmin: [minX, maxX],
@@ -37,13 +26,8 @@ export default class Controls {
       Xmax: [minX, maxX],
       Ymax: [minY, maxY]
     };
-    this.setupFormControls('box', boxParams);
+    this.setupForm('box', boxParams);
     this.userSelection = null;
-  }
-
-
-  setXYZObject(xyzObject) {
-    this.xyzObject = xyzObject;
   }
 
 
@@ -81,7 +65,6 @@ export default class Controls {
         this.deactivateDownloadButton(button);
       }
     }
-    console.log(bounds);
     if (isBoundsValid) {
       requestAnimationFrame(() => {
           this.onZoomChangeCb(this.userSelection);
@@ -90,10 +73,10 @@ export default class Controls {
   }
 
 
-  setupFormControls(formName, params) {
+  setupForm(formName, params) {
     const form = document.forms[formName];
     if (!form) {
-      throw new Error(`Form "${form}" not found`);
+      throw new Error(`Form '${form}' not found`);
     }
     const bounds = {};
     for (let propName in params) {
@@ -120,6 +103,9 @@ export default class Controls {
       form[propName + '-slider'].value = ((inVal - min) / (max - min) * 100).toFixed(2);
       this.processBounds(bounds, button);
     }
+    const existingTable = form.querySelector('table');
+    if (existingTable)
+      existingTable.remove();
     const controlsTable = document.createElement('table');
     form.insertBefore(controlsTable, button);
     for (let propName in params) {

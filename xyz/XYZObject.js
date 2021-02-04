@@ -1,25 +1,18 @@
-import * as THREE from '../js/lib/three.js/three.module.js';
-import {XYZLoader} from '../js/lib/three.js/XYZLoader.js';
+import * as THREE from './lib/three.js/three.module.js';
 import XYZArray from './XYZArray.js';
 
 
 /** Scene object to view XYZ file. */
 export default class XYZObject extends THREE.Object3D {
-  constructor(xyzFilename, cb) {
+  constructor(geometry) {
     super();
-    new XYZLoader().load(xyzFilename, geometry => {
-        this.origArr = [...geometry.attributes.position.array];
-        this.srcArr = new XYZArray(this.origArr);
-        const sourceBounds = new THREE.Box3;
-        geometry.computeBoundingBox();
-        //geometry.center();
-        sourceBounds.copy(geometry.boundingBox);
-        //this.shape = toShape(this.srcArr, sourceBounds);
-        this.shape = toPointsShape(this.srcArr.sourceArray, sourceBounds);
-        this.add(this.shape);
-        cb(this);
-    });
-    this.section = null;
+    this.origArr = [...geometry.attributes.position.array];
+    this.srcArr = new XYZArray(this.origArr);
+    const sourceBounds = new THREE.Box3;
+    geometry.computeBoundingBox();
+    sourceBounds.copy(geometry.boundingBox);
+    this.shape = toPointsShape(this.srcArr.sourceArray, sourceBounds);
+    this.add(this.shape);
   }
 
 

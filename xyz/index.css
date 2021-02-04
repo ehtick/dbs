@@ -1,35 +1,12 @@
+@import './lib/diurnal.js/diurnal.css';
+@import './lib/fullscreen.js/fullscreen.css';
+
+
 body {
   font: medium arial;
   margin: 0;
   padding: 0;
   color: #222;
-}
-
-
-.dark {
-  background: #0C1118;
-  color: white;
-}
-
-
-.dark h1 {
-  background: #151B23;
-}
-
-
-.bright {
-  background: white;
-  color: black;
-}
-
-
-.bright h1 {
-  background:lightgrey;
-}
-
-
-span {
-  padding: 0.5em;
 }
 
 
@@ -54,11 +31,6 @@ h3 {
 }
 
 
-button {
-  margin-top: 1em;
-}
-
-
 #control-panel {
   margin-left: 2em;
 }
@@ -72,10 +44,12 @@ button {
 }
 
 
+/** These settings are necessary for the fullscreen container. */
 #view {
   position: relative;
   top: 0;
-  right: 0;
+  left: 0;
+  background-color: inherit;
 }
 
 

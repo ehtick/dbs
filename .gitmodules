@@ -1,3 +1,9 @@
 [submodule "js/lib/testing.js"]
-	path = js/lib/testing.js
+	path = xyz/lib/testing.js
 	url = https://github.com/pablo-mayrgundter/testing.js
+[submodule "js/lib/diurnal.js"]
+	path = xyz/lib/diurnal.js
+	url = https://github.com/pablo-mayrgundter/diurnal.js
+[submodule "xyz/js/lib/fullscreen.js"]
+	path = xyz/lib/fullscreen.js
+	url = https://github.com/pablo-mayrgundter/fullscreen.js

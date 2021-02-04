@@ -6,13 +6,7 @@
     <link rel="stylesheet" href="index.css"/>
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
   </head>
-  <body class="dark">
-    <div style="float: right; padding: 2em">
-      <div style="color: grey">
-        <span class="bright" onclick="document.body.setAttribute('class', 'bright')">bright</span> |
-        <span class="dark" onclick="document.body.setAttribute('class', 'dark')">dark</span>
-      </div>
-    </div>
+  <body class="diurnal-bright">
     <h1>XYZ Extract Tool</h1>
     <div id="view-pad">
       <div id="view" style="width: 50%; height: 50%; min-width: 640px; min-height: 480px"></div>
@@ -20,23 +14,22 @@
     <div id="control-panel">
       <h2>Data Source</h2>
       <label for="area">Choose an area:</label>
-      <select name="sources"></select>
+      <select name="sources">
+        <option value="zurich-sample.xyz">Canton Zürich (sample)</option>
+        <option value="DTM_GRID_XYZ.xyz">Astra</option>
+        <option value="test.xyz">Test points</option>
+      </select>
       <form>
-        <input id="uploadInput" type="file">
-        <input type="submit" value="Send file">
+        Or <input id="fileLoader" type="file" accept=".xyz">
       </form>
       <h2>Project data</h2>
       <h3>by reference point</h3>
       <form name="radius">
-        <table><!-- See Controls.js. --></table>
         <a class="button" download="extract.xyz">Download</a>
       </form>
 
       <h3>by bounding box</h3>
       <form name="box">
-        <table>
-            <!-- See Controls.js. -->
-        </table>
         <a class="button" download="extract.xyz">Download</a>
       </form>
     </div>
