@@ -1,5 +1,6 @@
 @import './lib/diurnal.js/diurnal.css';
 @import './lib/fullscreen.js/fullscreen.css';
+@import './normalize.css';
 
 
 body {
