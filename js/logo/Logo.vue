@@ -9,9 +9,9 @@ import loadLogo from './logo.js';
 
 export default {
   setup() {
-    console.log('loading logo...');
+    //console.log('loading logo...');
     loadLogo(document.querySelector('#view'));
-    console.log('loading logo...done.');
+    //console.log('loading logo...done.');
   },
   data() {
     return {

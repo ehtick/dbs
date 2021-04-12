@@ -9,7 +9,7 @@ import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader.js';
 const r = 20, TAU = 2.0 * Math.PI, START = Date.now(), PRE_ROT = Math.PI / 2;
 let view;
 function setupView(elt) {
-  console.log('logo.js#setupView in container: ', elt);
+  //console.log('logo.js#setupView in container: ', elt);
   view = new View(elt, v => {
     const time = (Date.now() - START) / 20000;
     const x = r * Math.cos(time * TAU - PRE_ROT);
@@ -25,9 +25,9 @@ function setupView(elt) {
 
 
 function showName(name, fontPath) {
-  console.log('logo.js#showName');
+  //console.log('logo.js#showName');
   new THREE.FontLoader().load(fontPath, font => {
-    console.log('logo.js#showName, got font: ', font);
+    //console.log('logo.js#showName, got font: ', font);
     const geometry = new THREE.TextGeometry(name, {
       font: font,
       size: 10,
@@ -50,9 +50,9 @@ function showName(name, fontPath) {
 
 
 function showLawn(path) {
-  console.log('logo.js#showLawn');
+  //console.log('logo.js#showLawn');
   new XYZLoader().load(path, geometry => {
-    console.log('logo.js#showLawn, got geometry:', geometry);
+    //console.log('logo.js#showLawn, got geometry:', geometry);
     const obj = new XYZObject(geometry, false);
     view.displayXYZObject(obj);
   }, undefined, onErr);
@@ -60,14 +60,14 @@ function showLawn(path) {
 
 
 function onErr(error) {
-  console.error('Error loading: ', error);
+  //console.error('Error loading: ', error);
 }
 
 
 function loadTree(path, loader) {
-  console.log('logo.js#loadTree');
+  //console.log('logo.js#loadTree');
   loader.load(path, gltf => {
-    console.log('logo.js#loadTree, got gltf:', gltf);
+    //console.log('logo.js#loadTree, got gltf:', gltf);
     const scene = gltf.scene;
     scene.position.x = 5;
     scene.traverse(child => {

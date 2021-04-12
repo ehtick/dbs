@@ -1,6 +1,6 @@
 {
   "name": "@buildrs/dbs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Digital Building System",
   "main": "index.js",
   "scripts": {
