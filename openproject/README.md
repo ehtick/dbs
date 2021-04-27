@@ -49,3 +49,22 @@ docker run -d -p 8081:80 --env-file bim.env openproject/community:11
 ```
 
 Now on BIM edition
+
+## Admin
+Admin commands for the docker distribution need to be run accordingly:
+
+https://docs.openproject.org/installation-and-operations/operation/control/#docker-based-installation
+
+(from bug I opened: https://community.openproject.org/projects/openproject/work_packages/36441/activity)
+
+There is a Bim object listed there.  TODO: figure out Ruby, etc.
+
+## APIs
+These looks to be the main APIs for accessing OpenProject state.
+
+https://docs.openproject.org/api/
+
+https://docs.openproject.org/api/bcf-rest-api/
+
+https://docs.openproject.org/api/example/
+
